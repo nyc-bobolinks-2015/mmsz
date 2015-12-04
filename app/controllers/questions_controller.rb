@@ -16,6 +16,7 @@ class QuestionsController < ApplicationController
     if params[:tag_names]
       tags = create_new_tags(params[:tag_names])
     end
+
     if @question.save
       @question.tags = tags
       redirect_to questions_path
