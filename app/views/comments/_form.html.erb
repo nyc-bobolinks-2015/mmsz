@@ -1,0 +1,11 @@
+  <%= form_for [@commentable, @comment] do |f| %>
+  <fieldset>
+    <div>
+      <%= f.label :body %>
+      <%= f.text_field :body %>
+    </div>
+    <div>
+      <%= f.submit %>
+    </div>
+  </fieldset>
+<% end %>

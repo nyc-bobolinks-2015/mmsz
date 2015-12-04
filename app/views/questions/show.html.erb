@@ -18,6 +18,27 @@
     <% end %>
   </li>
 </ul>
+<% if @question.comments.length > 0 %>
+  <ul>
+    <% @question.comments.each do |comment| %>
+    <li>
+      <%= comment.body %><span> -<%= comment.user.username %></span>
+    </li>
+    <% if comment.user_id == current_user.id %>
+      <li>
+        <span><%= link_to "Edit", edit_question_comment_path(@question, comment) %></span>
+        <span>
+          <%= form_for [@question, comment], method: :delete do |f| %>
+            <%= f.submit "Delete" %>
+          <% end %>
+        </span>
+      </li>
+    <% end %>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= link_to "add a comment", new_question_comment_path(@question) %>
 
 <% if @question.answers.length > 0 %>
   <ul>
@@ -39,6 +60,29 @@
           <% end %>
         </span>
       <% end %>
+    </li>
+    <% if answer.comments.length > 0 %>
+      <li>
+        <% answer.comments.each do |comment| %>
+          <ul>
+            <li><%= comment.body %><span> -<%= comment.user.username %></span></li>
+
+            <% if comment.user_id == current_user.id %>
+            <li>
+              <span><%= link_to "Edit", edit_answer_comment_path(answer, comment) %></span>
+              <span>
+                <%= form_for [answer, comment], method: :delete do |f| %>
+                  <%= f.submit "Delete" %>
+                <% end %>
+              </span>
+              </li>
+        <% end %>
+          </ul>
+        <% end %>
+      </li>
+    <% end %>
+    <li>
+      <%= link_to "add a comment", new_answer_comment_path(answer) %>
     </li>
     <% end %>
   </ul>

@@ -6,9 +6,7 @@ class AnswersController < ApplicationController
 
   def create
     @question = Question.find_by(id: params[:question_id])
-    @answer = Answer.new(answer_params)
-    @answer.question_id = params[:question_id]
-    @answer.user_id = current_user.id
+    @answer = @question.answers.build(answer_params)
 
     if @answer.save
       redirect_to question_path(@question)
@@ -47,6 +45,6 @@ class AnswersController < ApplicationController
   private
 
   def answer_params
-    params.require(:answer).permit(:body)
+    params.require(:answer).permit(:body).merge(user_id: current_user.id)
   end
 end

@@ -11,7 +11,6 @@ class QuestionsController < ApplicationController
 
   def create
     @question = Question.new(question_params)
-    @question.user_id = current_user.id
 
     if params[:tag_names]
       tags = create_new_tags(params[:tag_names])
@@ -55,7 +54,7 @@ class QuestionsController < ApplicationController
   private
 
   def question_params
-    params.require(:question).permit(:title, :body)
+    params.require(:question).permit(:title, :body).merge(user_id: current_user.id)
   end
 
 end
