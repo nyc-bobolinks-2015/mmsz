@@ -17,6 +17,11 @@ class User < ActiveRecord::Base
     ordered_hash.keys.pop(3)
   end
 
+  def karma
+    karma_array = self.questions.map{&:vote_count} + self.answers.map{&:vote_count}
+    karma_array.reduce(:+)
+  end
+
   private
 
   def all_tags
