@@ -19,7 +19,7 @@
 				</li>
 			</ul>
 			<div class="question-info">
-				<p>asked: <%= #question.time_ago !!need method %> by <%= question.user %></p>
+				<p>asked: <%= question.created_ago %> by <%= question.user %></p>
 			</div>
 		</li>
 	<% end %>
