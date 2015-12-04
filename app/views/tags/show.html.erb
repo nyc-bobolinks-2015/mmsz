@@ -1,0 +1,18 @@
+<%= link_to "back to all tags", tags_path %>
+
+<div>
+  <ul>
+    <% @tag.questions.each do |question|%>
+      <li>
+        <p><%= link_to question.title, question_path(question) %></p>
+        <p><%= truncate(question.body, limit: 80) %></p>
+        <p><% question.tags.each do |tag| %>
+          <p class="little_box">
+            <%= link_to tag.name, tag_path(tag) %>
+          </p>
+           <% end %>
+        </p>
+      </li>
+    <% end %>
+  </ul>
+</div>

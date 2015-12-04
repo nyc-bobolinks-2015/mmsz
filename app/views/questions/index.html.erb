@@ -12,9 +12,7 @@
 						<% end %>
 				</li>
 			</ul>
-			<div class="question-info">
-				<p>asked: <%= question.created_ago %> days ago by <%= link_to question.user.username, user_path(question.user) %></p>
-			</div>
+
 		</li>
 	<% end %>
 </ol>
