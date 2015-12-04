@@ -16,7 +16,9 @@ Rails.application.routes.draw do
     end
   end
 
-
+  get '/login' => 'sessions#new'
+  get '/logout' => 'sessions#destroy'
+  get '/register' => 'users#new'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
