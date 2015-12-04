@@ -1,0 +1,47 @@
+<h2><%= @user.username %></h2>
+<p>Karma: <%= @user.karma %></p>
+<p>Top tags: <%= @user.top_three_tags %></p>
+<p>	Member for: <%= @user.created_ago %> </p>
+
+<div id="user-question-container">
+	<h3>Recent Questions:</h3>
+	<ol id="user-recent-questions">
+		 <% @user.recent_three_questions.each do |question| %>
+		 	<li class="question-container">
+				<div class="votes">
+					<p>Votes: <%= question.vote_count %></p>
+				</div>
+				<ul class="question-main">
+					<li><%= link_to question.title, question_path(question) %></li>
+					<li><%= truncate(question.body, limit: 80) %></li>
+					<li><% question.tags.each do |tag| %>
+								<span class="tag"><%= link_to tag.name, tag_path(tag) %></span>
+							<% end %>
+					</li>
+				</ul>
+				<div class="question-info">
+					<p>asked: <%= question.created_ago %> days ago by <%= question.user.username %></p>
+				</div>
+			</li>
+		 <% end %>
+	</ol>
+</div>
+<div id="user-answer-container">
+	<h3>Recent Answers:</h3>
+	<ol id="user-recent-answers">
+		<% @user.recent_three_answers.each do |answer| %>
+			<li class="answer-container">
+				<div class="votes">
+					<p>Votes: <%= answer.vote_count %></p>
+				</div>
+				<ul class="answer-main">
+					<li><%= truncate(answer.body, limit: 80) %></li>
+					<li><%= link_to answer.question.name, question_answer_path(answer.question, answer)  %></li>
+				</ul>
+				<div class="answer-info">
+					<p>Answered: <%= answer.created_ago %> days ago by <%= answer.user.username %></p>
+				</div>
+			</li>
+		<% end %>
+	</ol>
+</div>
