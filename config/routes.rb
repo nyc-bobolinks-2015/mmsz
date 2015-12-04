@@ -11,8 +11,12 @@ Rails.application.routes.draw do
     resources :comments, except: [:show] do
     end
   end
+
+  resources :questions do
+    resources :answers
+  end
   resources :answers, except: [:show] do
-    resources :comments, except: [:show] do
+    resources :comments, except: [:show, :index] do
     end
   end
 
