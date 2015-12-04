@@ -4,11 +4,4 @@ class Tag < ActiveRecord::Base
   validates :name, presence:true
   validates :name, length: {in: 1..30}
 
-  # def self.today
-  #   where("created_at >= ?", Time.zone.now.beginning_of_day)
-  # end
-
-  # def self.this_week
-  #   where("created_at >= ?", Time.zone.now.beginning_of_day - 7.days)
-  # end
 end

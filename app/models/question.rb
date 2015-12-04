@@ -14,4 +14,12 @@ class Question < ActiveRecord::Base
   validates :title, :body, presence:true
   validates :title, length: {in: 1..400}
   validates :body, length: {in: 1..3000}
+
+  def self.added_today
+      where("created_at >= ?", Time.zone.now.beginning_of_day)
+  end
+
+  def self.added_this_week
+      where("created_at >= ?", Time.zone.now.beginning_of_day - 7.days)
+  end
 end
