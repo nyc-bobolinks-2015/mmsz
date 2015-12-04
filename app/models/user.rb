@@ -13,8 +13,9 @@ class User < ActiveRecord::Base
 
   def top_three_tags
   	occurances = occurance_hash(all_tags)
-  	ordered_hash = occurances.sort_by{|_key, value| value}.to_h
-    ordered_hash.keys.pop(3)
+  	ordered_tags_hash = occurances.sort_by{|_key, value| value}.to_h
+    top_tags_objects = ordered_tags_hash.keys.pop(3)
+    top_tags_objects.map(&:name)
   end
 
   def karma
