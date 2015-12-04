@@ -7,4 +7,14 @@ class TagsController < ApplicationController
   def show
     @tag = Tag.find(params[:id])
   end
+
+  def search
+    @tag = Tag.find_by(name: params[:search_name])
+    if @tag
+      render "tags/show"
+    else
+      # @errors= ["no tag by this name"]
+      redirect_to tags_path
+    end
+  end
 end
