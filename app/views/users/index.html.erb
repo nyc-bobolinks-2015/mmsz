@@ -1,5 +1,11 @@
-<ol>
+<ol id="user-list">
 	<% @users.each do |users| %>
-		<li><%=  %></li>
+		<li class="user">
+			<ul>
+				<li class="username"><%= user.username %></li>
+				<li class="karma"><%= #user.karma %></li>
+				<li class="top-tags"><%= user.top_three_tags %></li>
+			</ul>
+		</li>
 	<% end %>
 </ol>
