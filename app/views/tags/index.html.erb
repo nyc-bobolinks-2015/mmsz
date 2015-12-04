@@ -1,10 +1,12 @@
 <!-- TODO: Make this route work -->
 <div id="search_by_tag">
-  <%= form_for :tag do |f| %>
-    <%= f.text_field :tag_name %>
-    <%= f.submit "Search By Tag"%>
+  <%= form_tag tags_search_path do %>
+    <%= text_field_tag :search_name %>
+    <%= submit_tag "Search By Tag"%>
   <% end %>
 </div>
+
+
 
 <div>
   <ul>

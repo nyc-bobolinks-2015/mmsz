@@ -22,6 +22,7 @@ Rails.application.routes.draw do
 
   resources :tags, only: [:show, :index]
 
+  post '/tags/search' => 'tags#search'
   get '/login' => 'sessions#new'
   get '/logout' => 'sessions#destroy'
   get '/register' => 'users#new'
