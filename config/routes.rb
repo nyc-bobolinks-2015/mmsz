@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :tags, only: [:show, :index]
+
   get '/login' => 'sessions#new'
   get '/logout' => 'sessions#destroy'
   get '/register' => 'users#new'
