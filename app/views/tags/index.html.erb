@@ -1,0 +1,17 @@
+<!-- TODO: Make this route work -->
+<div id="search_by_tag">
+  <%= form_for :tag do |f| %>
+    <%= f.text_field :tag_name %>
+    <%= f.submit "Search By Tag"%>
+  <% end %>
+</div>
+
+<div>
+  <ul>
+  <% @tags.each do |tag|%>
+    
+    <li><%= link_to tag.name, tag_path(tag) %> <%= tag.questions.count %></li>
+
+  <% end %>
+  </ul>
+</div>
