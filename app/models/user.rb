@@ -18,6 +18,14 @@ class User < ActiveRecord::Base
     top_tags_objects.map(&:name)
   end
 
+  def recent_three_questions
+    questions.order(created_at: :DESC).limit(3)
+  end
+
+  def recent_three_answers
+    answers.order(created_at: :DESC).limit(3)
+  end
+
   def karma
     karma_array = self.questions.map(&:vote_count) + self.answers.map(&:vote_count)
     karma_array.reduce(:+)
