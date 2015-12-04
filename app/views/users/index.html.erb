@@ -2,11 +2,11 @@
 	<% @users.each do |user| %>
 		<li class="user">
 			<ul>
-				<li class="username"><%= user.username %></li>
+				<li class="username"><%= link_to user.username, user_path(user) %></li>
 				<li class="karma"><%= user.karma %></li>
 				<li class="top-tags">
 					<% user.top_three_tags.each do |tag| %>
-						<%= tag %>
+						<%= link_to tag, tag_path(tag) %>
 					<% end %>
 				</li>
 			</ul>
