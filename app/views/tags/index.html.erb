@@ -11,7 +11,7 @@
   <% @tags.each do |tag|%>
     
     <li><%= link_to tag.name, tag_path(tag) %> <%= tag.questions.count %></li>
-    <li><% tag.questions.added_today.count %> asked today / <% tag.questions.added_this_week.count %> asked this week</li>
+    <li><%= tag.questions.added_today.length %> added today / <%= tag.questions.added_this_week.length %> added this week</li>
   <% end %>
   </ul>
 </div>
