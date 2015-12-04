@@ -1,0 +1,30 @@
+<h1><%= @question.title %></h1>
+
+<p><%= @question.body %></p>
+
+<ul>
+  <li>
+    <% @question.tags.each do |tag| %>
+      <span class="tag"><%= tag.name %></span>
+    <% end %>
+  </li>
+</ul>
+
+<% if @question.answers.length > 0 %>
+  <ul>
+    <% @question.answers.each do |answer| %>
+    <li>
+      <%= answer.body %>
+    </li>
+    <li>
+      <div class="answer-info">
+        <p>asked: <%= answer.created_ago %> days ago by <%= answer.user.username %></p>
+      </div>
+    </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>There are no answers for this question yet</p>
+<% end %>
+
+<%= link_to "Add an answer", new_question_answer_path(@question) %>
