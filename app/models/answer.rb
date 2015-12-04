@@ -6,4 +6,7 @@ class Answer < ActiveRecord::Base
   has_many :votes, as: :votable, dependent: :destroy
   belongs_to :question
   belongs_to :user
+
+  validates :body, presence: true
+  validates :body, length: {in: 1..3000}
 end
