@@ -1,5 +1,6 @@
 class Question < ActiveRecord::Base
-	include createable
+	include Createable
+	include VoteCounter
 
   has_many :answers, dependent: :destroy
 

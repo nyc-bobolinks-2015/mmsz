@@ -8,7 +8,7 @@
 	<% @questions.each do |question| %>
 		<li class="question-container">
 			<div class="votes">
-				<p>Votes: <%= #question.votecount  !!need method %></p>
+				<p>Votes: <%= question.vote_count %></p>
 			</div>
 			<ul class="question-main">
 				<li><%= question.title %></li>
