@@ -1,1 +1,26 @@
-Hello
+<ul id="options-links">
+	<li><%= link_to "Ask a Question", new_question_path  %></li>
+	<li><%= link_to "Tags", tags_path %></li>
+	<li><%= link_to "Users", users_path  %></li>
+</ul>
+
+<ol id="questions-list">
+	<% @questions.each do |question| %>
+		<li class="question-container">
+			<div class="votes">
+				<p>Votes: <%= question.vote_count %></p>
+			</div>
+			<ul class="question-main">
+				<li><%= question.title %></li>
+				<li><%= truncate(quesion.body, limit: 80) %></li>
+				<li><%= question.tags.each do |tag| %>
+							<span class="tag"><%= tag %></span>
+						<% end %>
+				</li>
+			</ul>
+			<div class="question-info">
+				<p>asked: <%= question.created_ago %> by <%= question.user %></p>
+			</div>
+		</li>
+	<% end %>
+</ol>
