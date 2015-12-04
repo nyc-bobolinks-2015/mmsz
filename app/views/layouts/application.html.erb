@@ -18,6 +18,13 @@
       </div>
     <% end %>
   </div>
+  <div id="error-messages">
+    <% if @errors %>
+      <% @errors.each do |error| %>
+        <p><%= error %></p>
+      <% end %>
+    <% end %>
+  </div>
   <div id="user-information">
     <% if current_user %>
       <%= current_user.username %>
