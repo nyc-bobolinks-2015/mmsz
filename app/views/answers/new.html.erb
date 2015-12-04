@@ -1,11 +1,2 @@
-<%= form_for [@question, @answer] do |f| %>
-  <fieldset>
-    <div>
-      <%= f.label :body %>
-      <%= f.text_field :body %>
-    </div>
-    <div>
-      <%= f.submit %>
-    </div>
-  </fieldset>
-<% end %>
+<h2>Create a new answer</h2>
+<%= render "form" %>
