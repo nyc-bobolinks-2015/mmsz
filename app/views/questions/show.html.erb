@@ -1,5 +1,14 @@
 <h1><%= @question.title %></h1>
 
+<% if @question.user_id == current_user.id %>
+  <span><%= link_to "Edit", edit_question_path(@question) %></span>
+  <span>
+    <%= form_for @question, method: :delete do |f| %>
+      <%= f.submit "Delete" %>
+    <% end %>
+  </span>
+<% end %>
+
 <p><%= @question.body %></p>
 
 <ul>
@@ -20,6 +29,16 @@
       <div class="answer-info">
         <p>asked: <%= answer.created_ago %> days ago by <%= answer.user.username %></p>
       </div>
+    </li>
+    <li>
+      <% if answer.user_id == current_user.id %>
+        <span><%= link_to "Edit", edit_question_answer_path(@question, answer) %></span>
+        <span>
+          <%= form_for [@question, answer], method: :delete do |f| %>
+            <%= f.submit "Delete" %>
+          <% end %>
+        </span>
+      <% end %>
     </li>
     <% end %>
   </ul>
