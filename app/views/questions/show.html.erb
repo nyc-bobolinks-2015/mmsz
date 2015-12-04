@@ -21,19 +21,19 @@
 <% if @question.comments.length > 0 %>
   <ul>
     <% @question.comments.each do |comment| %>
-    <li>
-      <%= comment.body %><span> -<%= comment.user.username %></span>
-    </li>
-    <% if comment.user_id == current_user.id %>
       <li>
-        <span><%= link_to "Edit", edit_question_comment_path(@question, comment) %></span>
-        <span>
-          <%= form_for [@question, comment], method: :delete do |f| %>
-            <%= f.submit "Delete" %>
-          <% end %>
-        </span>
+        <%= comment.body %><span> -<%= comment.user.username %></span>
       </li>
-    <% end %>
+      <% if comment.user_id == current_user.id %>
+        <li>
+          <span><%= link_to "Edit", edit_question_comment_path(@question, comment) %></span>
+          <span>
+            <%= form_for [@question, comment], method: :delete do |f| %>
+              <%= f.submit "Delete" %>
+            <% end %>
+          </span>
+        </li>
+      <% end %>
     <% end %>
   </ul>
 <% end %>
@@ -43,47 +43,46 @@
 <% if @question.answers.length > 0 %>
   <ul>
     <% @question.answers.each do |answer| %>
-    <li>
-      <%= answer.body %>
-    </li>
-    <li>
-      <div class="answer-info">
-        <p>asked: <%= answer.created_ago %> days ago by <%= answer.user.username %></p>
-      </div>
-    </li>
-    <li>
-      <% if answer.user_id == current_user.id %>
-        <span><%= link_to "Edit", edit_question_answer_path(@question, answer) %></span>
-        <span>
-          <%= form_for [@question, answer], method: :delete do |f| %>
-            <%= f.submit "Delete" %>
-          <% end %>
-        </span>
-      <% end %>
-    </li>
-    <% if answer.comments.length > 0 %>
       <li>
-        <% answer.comments.each do |comment| %>
-          <ul>
-            <li><%= comment.body %><span> -<%= comment.user.username %></span></li>
-
-            <% if comment.user_id == current_user.id %>
-            <li>
-              <span><%= link_to "Edit", edit_answer_comment_path(answer, comment) %></span>
-              <span>
-                <%= form_for [answer, comment], method: :delete do |f| %>
-                  <%= f.submit "Delete" %>
-                <% end %>
-              </span>
-              </li>
-        <% end %>
-          </ul>
+        <%= answer.body %>
+      </li>
+      <li>
+        <div class="answer-info">
+          <p>asked: <%= answer.created_ago %> days ago by <%= answer.user.username %></p>
+        </div>
+      </li>
+      <li>
+        <% if answer.user_id == current_user.id %>
+          <span><%= link_to "Edit", edit_question_answer_path(@question, answer) %></span>
+          <span>
+            <%= form_for [@question, answer], method: :delete do |f| %>
+              <%= f.submit "Delete" %>
+            <% end %>
+          </span>
         <% end %>
       </li>
-    <% end %>
-    <li>
-      <%= link_to "add a comment", new_answer_comment_path(answer) %>
-    </li>
+      <% if answer.comments.length > 0 %>
+        <li>
+          <% answer.comments.each do |comment| %>
+            <ul>
+              <li><%= comment.body %><span> -<%= comment.user.username %></span></li>
+              <% if comment.user_id == current_user.id %>
+                <li>
+                  <span><%= link_to "Edit", edit_answer_comment_path(answer, comment) %></span>
+                  <span>
+                    <%= form_for [answer, comment], method: :delete do |f| %>
+                      <%= f.submit "Delete" %>
+                    <% end %>
+                  </span>
+                </li>
+              <% end %>
+            </ul>
+          <% end %>
+        </li>
+      <% end %>
+      <li>
+        <%= link_to "add a comment", new_answer_comment_path(answer) %>
+      </li>
     <% end %>
   </ul>
 <% else %>
