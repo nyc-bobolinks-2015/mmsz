@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+	include Createable
+
   has_secure_password
 
   has_many :questions, dependent: :destroy
@@ -8,6 +10,4 @@ class User < ActiveRecord::Base
 
   validates :username, presence: true
   validates :username, length: {in: 1..40}
-
-
 end
