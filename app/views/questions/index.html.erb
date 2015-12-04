@@ -12,18 +12,15 @@
 			</div>
 			<ul class="question-main">
 				<li><%= question.title %></li>
-				<li><%= truncate(quesion.body, limit: 80) %></li>
-				<li><%= question.tags.each do |tag| %>
-							<span class="tag"><%= tag %></span>
+				<li><%= truncate(question.body, limit: 80) %></li>
+				<li><% question.tags.each do |tag| %>
+							<span class="tag"><%= tag.name %></span>
 						<% end %>
 				</li>
 			</ul>
 			<div class="question-info">
-				<p>asked: <%= question.created_ago %> by <%= question.user %></p>
+				<p>asked: <%= question.created_ago %> days ago by <%= question.user.username %></p>
 			</div>
 		</li>
 	<% end %>
 </ol>
-
-
-  
