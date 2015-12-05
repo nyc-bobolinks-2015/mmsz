@@ -3,10 +3,6 @@ require 'spec_helper'
 feature 'User browsing the website' do
 	before :each do
 		user = FactoryGirl.create(:user)
-		# visit login_path
-		# fill_in "password", with: user.password
-		# fill_in "email", with: user.email
-		# click_button "Log in"
 		stub_current_user(user)
 	end
 
@@ -63,6 +59,15 @@ feature 'User browsing the website' do
     	visit root_path
     	click_link("Ask a Question")
     	expect(current_path).to eq(new_question_path)
+    end
+
+    it "Can post a question" do
+    	visit new_question_path
+    	question = FactoryGirl.create(:question)
+    	fill_in "question_title", with: question.title
+		  fill_in "question_body", with: question.body
+		  click_button "Create Question"
+		  expect(current_path).to eq(questions_path)
     end
 	end
 end
