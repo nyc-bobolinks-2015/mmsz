@@ -12,12 +12,11 @@ class QuestionsController < ApplicationController
   def create
     @question = Question.new(question_params)
 
-    if params[:tag_names]
-      tags = create_new_tags(params[:tag_names])
-    end
 
     if @question.save
-      @question.tags = tags
+      if params[:tag_names]
+        tags = create_new_tags(params[:tag_names], @question)
+      end
       redirect_to questions_path
     else
       @errors = @question.errors.full_messages
