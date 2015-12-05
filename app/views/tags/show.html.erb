@@ -1,10 +1,10 @@
 <%= link_to "back to all tags", tags_path %>
-
-
+<h2><%= @tag.name.upcase %></h2>  
 <div>
   <ul>
     <% @tag.questions.each do |question|%>
       <li>
+        <p> <%= question.vote_count %> votes, <%= question.answers.count %> answers </p>
         <p><%= link_to question.title, question_path(question) %></p>
         <p><%= truncate(question.body, limit: 80) %></p>
         <p><% question.tags.each do |tag| %>
