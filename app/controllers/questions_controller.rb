@@ -31,7 +31,6 @@ class QuestionsController < ApplicationController
   def update
     @question = Question.find_by(id: params[:id])
     @question.assign_attributes(question_params)
-
     if @question.save
       redirect_to question_path(@question)
     else
