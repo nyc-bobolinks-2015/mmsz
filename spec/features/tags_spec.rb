@@ -3,7 +3,8 @@ require 'rails_helper'
 feature 'Tags index page' do 
   
   before :each do
-      stub_authorize_user!
+    user = FactoryGirl.create(:user)
+      stub_current_user(user)
       5.times{FactoryGirl.create(:tag)}
   end
 
