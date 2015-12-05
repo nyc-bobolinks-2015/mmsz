@@ -1,28 +1,5 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a clone of StackOverflow made over a weekend by Michael, Miguel, Sam, and Zino.  
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+The purpose of this site is to allow users to ask questions, receive answers, upvote and downvote question and answers and also comment on questions and answers. Questions have tags, and you can search for all posts related to a specific tag.
