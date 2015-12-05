@@ -36,4 +36,22 @@ RSpec.describe Question, type: :model do
       question.save
     }.to change{question.id}.from(nil).to be_truthy
   end
+
+  context ".added_today" do
+    it "should return all questions added today" do
+      q1 = FactoryGirl.create(:question)
+      q2 = FactoryGirl.create(:question)
+      q3 = FactoryGirl.create(:question)
+
+      expect(Question.added_today).to eq([q1, q2, q3])
+    end
+
+    it "should return all questions added this week" do
+      q1 = FactoryGirl.create(:question)
+      q2 = FactoryGirl.create(:question)
+      q3 = FactoryGirl.create(:question)
+
+      expect(Question.added_this_week).to eq([q1, q2, q3])
+    end
+  end
 end
