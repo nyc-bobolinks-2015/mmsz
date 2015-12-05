@@ -44,5 +44,12 @@ feature 'User browsing the website' do
     	click_link("#{other_user.username}")
     	expect(current_path).to eq(user_path(other_user))
     end
+
+    it "can log out" do
+    	visit	root_path
+
+    	click_link("Logout")
+    	expect(current_path).to eq(root_path)
+    end
 	end
 end
