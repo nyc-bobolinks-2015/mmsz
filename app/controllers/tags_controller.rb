@@ -1,4 +1,3 @@
-require 'pry'
 class TagsController < ApplicationController
   def index
     @tags = Tag.all
@@ -13,8 +12,8 @@ class TagsController < ApplicationController
     if @tag
       render "tags/show"
     else
-      # @errors= ["no tag by this name"]
       redirect_to tags_path
     end
   end
+
 end
