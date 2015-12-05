@@ -36,5 +36,13 @@ feature 'User browsing the website' do
     	click_link("#{user.username}")
     	expect(current_path).to eq(user_path(user))
     end
+
+    it "goes to another user's profile page from posts index" do
+    	question = FactoryGirl.create(:question)
+    	other_user = User.find_by(id: question.user_id)
+    	visit root_path
+    	click_link("#{other_user.username}")
+    	expect(current_path).to eq(user_path(other_user))
+    end
 	end
 end
