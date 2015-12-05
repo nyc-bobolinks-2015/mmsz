@@ -1,6 +1,7 @@
 class TagsController < ApplicationController
   def index
-    @tags = Tag.all
+    mode = params[:query] || "latest"
+    mode == "latest" ? @tags = Tag.latest : @tags = Tag.greatest
   end
 
   def show

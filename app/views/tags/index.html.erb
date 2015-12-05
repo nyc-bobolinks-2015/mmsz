@@ -6,6 +6,8 @@
   <% end %>
 </div>
 
+<%= link_to "Latest", tags: :index, :query => "latest" %> <%= link_to "Greatest", tags: :index, :query => "greatest" %>
+
 <div>
   <ul>
   <% @tags.each do |tag|%>
