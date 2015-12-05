@@ -11,9 +11,10 @@
 	<ol id="user-recent-questions">
 		 <% @user.recent_three_questions.each do |question| %>
 		 	<li class="question-container">
-				<div class="votes">
-					<p>Votes: <%= question.vote_count %></p>
-				</div>
+				<ul class="votes-and-answers">
+					<li>Votes: <%= question.vote_count %></li>
+					<li>Answers: <%= question.answers.count %></li>
+				</ul>
 				<ul class="question-main">
 					<li><%= link_to question.title, question_path(question) %></li>
 					<li><%= truncate(question.body, limit: 80) %></li>
