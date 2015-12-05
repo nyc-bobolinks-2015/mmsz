@@ -69,5 +69,19 @@ feature 'User browsing the website' do
 		  click_button "Create Question"
 		  expect(current_path).to eq(questions_path)
     end
+
+    # it "Can click on a tag" do
+    # 	question = FactoryGirl.create(:question)
+    # 	visit root_path
+    # 	click_link("#{question.tags.first.name}")
+    # 	expect(current_path).to eq(tag_path(question.tags.first))
+    # end
+
+    it "Can go to Tag index page" do
+    	visit root_path
+    	click_link("Tags")
+
+    	expect(current_path).to eq(tags_path)
+    end
 	end
 end
