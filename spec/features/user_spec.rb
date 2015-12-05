@@ -52,11 +52,17 @@ feature 'User browsing the website' do
     	expect(current_path).to eq(root_path)
     end
 
-    it "can go to a post-show page" do
+    it "can go to a question-show page" do
     	question = FactoryGirl.create(:question)
     	visit root_path
     	click_link("#{question.title}", match: :first)
     	expect(current_path).to eq(question_path(question))
+    end
+
+    it "Can get the form to post a question" do
+    	visit root_path
+    	click_link("Ask a Question")
+    	expect(current_path).to eq(new_question_path)
     end
 	end
 end
