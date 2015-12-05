@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   has_many :comments, dependent: :destroy
 
   validates :username, presence: true
+  validates :email, presence: true
+  validates :password, presence: true
   validates :username, length: {in: 1..40}
 
   def top_three_tags
@@ -46,5 +48,5 @@ class User < ActiveRecord::Base
   	end
   	hash
   end
-  
+
 end
