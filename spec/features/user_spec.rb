@@ -8,11 +8,11 @@ feature 'User browsing the website' do
 		# fill_in "email", with: user.email
 		# click_button "Log in"
 		stub_current_user(user)
-		5.times{FactoryGirl.create(:question)}
 	end
 
 	context "on hompage" do
 		it "sees a list of recent question titles" do
+			5.times{FactoryGirl.create(:question)}
       visit root_path
       expect(page).to have_css('li')
     end
@@ -50,6 +50,13 @@ feature 'User browsing the website' do
 
     	click_link("Logout")
     	expect(current_path).to eq(root_path)
+    end
+
+    it "can go to a post-show page" do
+    	question = FactoryGirl.create(:question)
+    	visit root_path
+    	click_link("#{question.title}", match: :first)
+    	expect(current_path).to eq(question_path(question))
     end
 	end
 end
