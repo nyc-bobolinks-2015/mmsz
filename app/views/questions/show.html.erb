@@ -14,15 +14,20 @@
 <ul>
   <li>
     <% @question.tags.each do |tag| %>
-      <span class="tag"><%= tag.name %></span>
+      <span class="tag"><%= link_to tag.name, tag_path(tag) %></span>
     <% end %>
   </li>
 </ul>
+
+<div class="question-info">
+        <p>asked: <%= @question.created_ago %> days ago by <%= link_to @question.user.username, user_path(@question.user) %></p>
+</div>
+
 <% if @question.comments.length > 0 %>
   <ul>
     <% @question.comments.each do |comment| %>
       <li>
-        <%= comment.body %><span> -<%= comment.user.username %></span>
+        <%= comment.body %><span> -<%= link_to comment.user.username, user_path(comment.user) %></span>
       </li>
       <% if comment.user_id == current_user.id %>
         <li>
@@ -48,7 +53,7 @@
       </li>
       <li>
         <div class="answer-info">
-          <p>asked: <%= answer.created_ago %> days ago by <%= answer.user.username %></p>
+          <p>answered: <%= answer.created_ago %> days ago by <%= link_to answer.user.username, user_path(answer.user) %></p>
         </div>
       </li>
       <li>
@@ -65,7 +70,7 @@
         <li>
           <% answer.comments.each do |comment| %>
             <ul>
-              <li><%= comment.body %><span> -<%= comment.user.username %></span></li>
+              <li><%= comment.body %><span> -<%= link_to comment.user.username, user_path(comment.user) %></span></li>
               <% if comment.user_id == current_user.id %>
                 <li>
                   <span><%= link_to "Edit", edit_answer_comment_path(answer, comment) %></span>

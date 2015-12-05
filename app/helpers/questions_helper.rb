@@ -7,7 +7,11 @@ module QuestionsHelper
   def create_new_tags(tag_names, question)
     separate_tags(tag_names).map do |tag_name|
       tag_name = tag_name.downcase
-      question.tags.find_or_create_by(name: tag_name)
+      tag = Tag.find_or_create_by(name: tag_name)
+      unless question.tags.include?(tag)
+        question.tags << tag
+      end
+      # question.tags.find_or_create_by(name: tag_name)
     end
   end
 
