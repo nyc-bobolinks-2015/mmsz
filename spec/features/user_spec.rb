@@ -70,6 +70,7 @@ feature 'User browsing the website' do
 		  expect(current_path).to eq(questions_path)
     end
 
+    # Factory for tags still not implimented so can't work.
     # it "Can click on a tag" do
     # 	question = FactoryGirl.create(:question)
     # 	visit root_path
@@ -82,6 +83,26 @@ feature 'User browsing the website' do
     	click_link("Tags")
 
     	expect(current_path).to eq(tags_path)
+    end
+
+    it "Can create an Answer" do
+    	question = FactoryGirl.create(:question)
+    	visit question_path(question)
+    	click_link("Add an answer")
+    	answer = FactoryGirl.create(:answer)
+    	fill_in "answer_body", with: answer.body
+    	click_button "Create Answer"
+    	expect(current_path).to eq(question_path(question))
+    end
+
+    it "Can create a Comment" do
+    	question = FactoryGirl.create(:question)
+    	visit question_path(question)
+    	click_link("add a comment")
+    	comment = FactoryGirl.create(:question_comment)
+    	fill_in "comment_body", with: comment.body
+    	click_button "Create Comment"
+    	expect(current_path).to eq(question_path(question))
     end
 	end
 end
