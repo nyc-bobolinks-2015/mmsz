@@ -8,10 +8,6 @@ class ApplicationController < ActionController::Base
     current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
   end
 
-  def authorize_user!
-    redirect_to new_admin_session_path unless current_user.present?
-  end
-
   def logged_in?
     !!session[:user_id]
   end

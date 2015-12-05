@@ -41,11 +41,5 @@ RSpec.describe ApplicationController, type: :controller do
     end
   end
 
-  describe "#authorize_user!" do
-    context "with a logged in user" do
-      it "redirects "
-    end
-  end
-
 
 end
