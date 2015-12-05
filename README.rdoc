@@ -1,5 +1,7 @@
 == README
 
-This is a clone of StackOverflow made over a weekend by Michael, Miguel, Sam, and Zino.  
+This is a clone of StackOverflow made over a weekend by Michael, Miguel, Sam, and Zino.
 
 The purpose of this site is to allow users to ask questions, receive answers, upvote and downvote question and answers and also comment on questions and answers. Questions have tags, and you can search for all posts related to a specific tag.
+
+https://circleci.com/gh/nyc-bobolinks-2015/mmsz.png?circle-token=:circle-token
