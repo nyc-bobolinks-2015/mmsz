@@ -18,7 +18,7 @@
 
     <div class="row questionControlRow">
       <div class="questionOwnerControl col-sm-8">
-        <% if @question.user_id == current_user.id %>
+        <% if current_user && @question.user_id == current_user.id %>
           <div class="questionControlButtons row">
             <%= link_to "Edit", edit_question_path(@question), class:"btn btn-sm btn-default col-sm-1" %>
             <%= form_for @question, method: :delete do |f| %>
@@ -35,9 +35,11 @@
 </div>
 <%=render partial:"comment_display",locals:{source:@question}%>
 
-<div class="row addCommentButton">
-  <%= link_to "add a comment", new_question_comment_path(@question) %>
-</div>
+<% if logged_in? %>
+  <div class="row addCommentButton">
+    <%= link_to "add a comment", new_question_comment_path(@question) %>
+  </div>
+<% end %>
 
 <% if @question.answers.length == 0 %>
   <div class="row">
@@ -59,14 +61,16 @@
   </div>
   <div class="col-sm-11">
     <div class="row">
-      <%= answer.body %> <% if answer.user_id == current_user.id %><%= link_to "Edit", edit_question_path(@question, answer) %> | <%= form_for [@question, answer], method: :delete, :html=>{:class=>'commentControl'} do |f| %><%= f.submit "Delete", class:"btn btn-link commentControl" %><% end %><% end %>
+      <%= answer.body %> <% if current_user && answer.user_id == current_user.id %><%= link_to "Edit", edit_question_path(@question, answer) %> | <%= form_for [@question, answer], method: :delete, :html=>{:class=>'commentControl'} do |f| %><%= f.submit "Delete", class:"btn btn-link commentControl" %><% end %><% end %>
     </div>
     <div class="answerSecondRow row">
       <div class="questionOwnerControl col-sm-8">
           <%= render partial:"comment_display", locals:{source:answer}%>
-        <div class="row">
-          <%= link_to "add a comment", new_answer_comment_path(answer) %>
-        </div>
+        <% if logged_in? %>
+          <div class="row">
+            <%= link_to "add a comment", new_answer_comment_path(answer) %>
+          </div>
+        <% end %>
       </div>
 
       <div class="col-sm-4">
@@ -79,8 +83,10 @@
 <% end %>
 </div>
 
-<div class="row">
-  <h2>Your Answer</h2>
-  <%= render partial:"answer_form",locals:{question: @question,answer: Answer.new}%>
-</div>
+<% if logged_in? %>
+  <div class="row">
+    <h2>Your Answer</h2>
+    <%= render partial:"answer_form",locals:{question: @question,answer: Answer.new}%>
+  </div>
+<% end %>
 
