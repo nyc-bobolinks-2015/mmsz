@@ -8,7 +8,13 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    @question = Question.new
+    if logged_in?
+      @question = Question.new
+      render :'questions/new'
+    else
+      flash.alert = "You must be logged in to ask a question."
+      redirect_to new_sessions_path
+    end
   end
 
   def create
