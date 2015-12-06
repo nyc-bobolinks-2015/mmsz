@@ -22,4 +22,13 @@ class Question < ActiveRecord::Base
   def self.added_this_week
     where("created_at >= ?", Time.zone.now.beginning_of_day - 7.days)
   end
+
+  def self.latest
+    Question.all.order(updated_at: :desc)
+  end
+
+  def self.greatest
+    questions = Question.all
+    questions.sort_by{|question| -question.vote_count}
+  end
 end

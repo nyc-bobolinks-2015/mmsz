@@ -1,3 +1,7 @@
+<div id="latest_and_greatest">
+  <%= link_to "Latest", question: :index, :query => "latest" %> <%= link_to "Greatest", question: :index, :query => "greatest" %>
+</div>
+
 <ol id="questions-list">
 	<% @questions.each do |question| %>
 		<li class="question-container">
