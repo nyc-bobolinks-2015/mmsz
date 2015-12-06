@@ -9,7 +9,14 @@
   </span>
 <% end %>
 
-<p><%= @question.body %></p>
+<p>
+  <span>
+    <div class="votes">
+        <p>Votes: <%= @question.vote_count %></p>
+    </div>
+  </span>
+  <%= @question.body %>
+</p>
 
 <ul>
   <li>
@@ -51,6 +58,11 @@
   <ul>
     <% @question.answers.each do |answer| %>
       <li>
+        <span>
+          <div class="votes">
+            <p>Votes: <%= answer.vote_count %></p>
+          </div>
+        </span>
         <%= answer.body %>
       </li>
       <li>

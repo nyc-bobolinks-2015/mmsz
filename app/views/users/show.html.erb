@@ -40,7 +40,7 @@
 				</div>
 				<ul class="answer-main">
 					<li><%= truncate(answer.body, limit: 80) %></li>
-					<li><%= link_to answer.question.name, question_answer_path(answer.question, answer)  %></li>
+					<li><%= link_to answer.question.title, question_answer_path(answer.question, answer)  %></li>
 				</ul>
 				<div class="answer-info">
 					<p>Answered: <%= answer.created_ago %> days ago by <%= answer.user.username %></p>
