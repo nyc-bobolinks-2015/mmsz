@@ -31,4 +31,10 @@ class Question < ActiveRecord::Base
     questions = Question.all
     questions.sort_by{|question| -question.vote_count}
   end
+
+  def calculate_vote
+    upvote = self.votes.where(up_vote:true).count
+    downvote= self.votes.count - upvote
+    net=upvote-downvote
+  end
 end

@@ -9,4 +9,10 @@ class Answer < ActiveRecord::Base
 
   validates :body, presence: true
   validates :body, length: {in: 1..3000}
+
+   def calculate_vote
+    upvote = self.votes.where(up_vote:true).count
+    downvote= self.votes.count - upvote
+    net=upvote-downvote
+  end
 end
