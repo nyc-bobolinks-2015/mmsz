@@ -39,30 +39,6 @@
           <% end %>
         </div>
       <% end %>
-<<<<<<< HEAD
-    <% end %>
-  </div>
-  <div id="logo">
-    <%= link_to "STACKUNDERFLOW", root_path %>
-  </div>
-  <ul id="options-links">
-    <% if current_user %>
-      <li><%= link_to "Ask a Question", new_question_path  %></li>
-    <% end %>
-    <li><%= link_to "Tags", tags_path %></li>
-    <li><%= link_to "Users", users_path  %></li>
-  </ul>
-  <div id="user-information">
-    <%= link_to 'Home', root_path %>
-    <% if current_user %>
-      <%= link_to current_user.username, user_path(current_user) %>
-      <%= link_to 'Logout', logout_path %>
-    <% else %>
-      <%= link_to 'Login', login_path %>
-      <%= link_to 'Register', register_path %>
-    <% end %>
-
-=======
     </div>
     <div id="error-messages">
       <% if @errors %>
@@ -84,7 +60,6 @@
       </div>
     </div>
     <%= yield %>
->>>>>>> added both upvote and downvote ajax functionality on both question and answer models
   </div>
 </body>
 </html>

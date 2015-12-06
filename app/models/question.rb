@@ -23,7 +23,6 @@ class Question < ActiveRecord::Base
     where("created_at >= ?", Time.zone.now.beginning_of_day - 7.days)
   end
 
-<<<<<<< HEAD
   def self.latest
     Question.all.order(updated_at: :desc)
   end
@@ -32,12 +31,10 @@ class Question < ActiveRecord::Base
     questions = Question.all
     questions.sort_by{|question| -question.vote_count}
   end
-end
-=======
+
   def calculate_vote
     upvote = self.votes.where(up_vote:true).count
     downvote= self.votes.count - upvote
     net=upvote-downvote
   end
 end
->>>>>>> added both upvote and downvote ajax functionality on both question and answer models
