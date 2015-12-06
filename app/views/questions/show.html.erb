@@ -12,7 +12,7 @@
 <p>
   <span>
     <div class="votes">
-        <p>Votes: <%= @question.vote_count %></p>
+      <p>Votes: <%= @question.vote_count %></p>
     </div>
   </span>
   <%= @question.body %>
@@ -54,9 +54,9 @@
   <%= link_to "add a comment", new_question_comment_path(@question) %>
 <% end %>
 
-<% if @question.answers.length > 0 %>
+<% if @answers.length > 0 %>
   <ul>
-    <% @question.answers.each do |answer| %>
+    <% @answers.each do |answer| %>
       <li>
         <span>
           <div class="votes">
