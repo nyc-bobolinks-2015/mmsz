@@ -18,7 +18,7 @@
 
     <div class="row questionControlRow">
       <div class="questionOwnerControl col-sm-8">
-        <% if @question.user_id == current_user.id %>
+        <% if current_user && @question.user_id == current_user.id %>
           <div class="questionControlButtons row">
             <%= link_to "Edit", edit_question_path(@question), class:"btn btn-sm btn-default col-sm-1" %>
             <%= form_for @question, method: :delete do |f| %>
@@ -59,7 +59,7 @@
   </div>
   <div class="col-sm-11">
     <div class="row">
-      <%= answer.body %> <% if answer.user_id == current_user.id %><%= link_to "Edit", edit_question_path(@question, answer) %> | <%= form_for [@question, answer], method: :delete, :html=>{:class=>'commentControl'} do |f| %><%= f.submit "Delete", class:"btn btn-link commentControl" %><% end %><% end %>
+      <%= answer.body %> <% if current_user && answer.user_id == current_user.id %><%= link_to "Edit", edit_question_path(@question, answer) %> | <%= form_for [@question, answer], method: :delete, :html=>{:class=>'commentControl'} do |f| %><%= f.submit "Delete", class:"btn btn-link commentControl" %><% end %><% end %>
     </div>
     <div class="answerSecondRow row">
       <div class="questionOwnerControl col-sm-8">

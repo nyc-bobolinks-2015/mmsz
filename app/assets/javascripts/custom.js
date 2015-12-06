@@ -51,4 +51,36 @@ $(document).ready(function(){
 		});
 	});
 
+	$('#answerRow').on("mouseenter",".glyphicon-triangle-bottom",function(event) {
+		$(this).css("color", "orange");
+	});
+
+	$('#answerRow').on("mouseleave",".glyphicon-triangle-bottom",function(event) {
+		$(this).css("color", "grey");
+	});
+
+	$('#answerRow').on("mouseenter",".glyphicon-triangle-top",function(event) {
+		$(this).css("color", "orange");
+	});
+
+	$('#answerRow').on("mouseleave",".glyphicon-triangle-top",function(event) {
+		$(this).css("color", "grey");
+	});
+
+	$('#questionUpvoteButton').on("mouseenter", function(event) {
+		$(this).css("color", "orange");
+	});
+
+	$('#questionUpvoteButton').on("mouseleave", function(event) {
+		$(this).css("color", "grey");
+	});
+
+	$('#questionDownvoteButton').on("mouseenter",function(event) {
+		$(this).css("color", "orange");
+	});
+
+	$('#questionDownvoteButton').on("mouseleave", function(event) {
+		$(this).css("color", "grey");
+	});
+
 });
