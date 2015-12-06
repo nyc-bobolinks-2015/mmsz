@@ -79,6 +79,15 @@ feature 'User browsing the website' do
 		  expect(page).to have_text("can't be blank")
     end
 
+    it "Cannot post a question without a title" do
+    	visit new_question_path
+    	question = FactoryGirl.build(:question, body: nil)
+    	fill_in "question_title", with: question.title
+		  fill_in "question_body", with: question.body
+		  click_button "Create Question"
+		  expect(page).to have_text("can't be blank")
+    end
+
     # Factory for tags still not implimented so can't work.
     # it "Can click on a tag" do
     # 	question = FactoryGirl.create(:question)
