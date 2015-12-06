@@ -1,115 +1,92 @@
-<h1><%= @question.title %></h1>
 
-<% if current_user && @question.user_id == current_user.id %>
-  <span><%= link_to "Edit", edit_question_path(@question) %></span>
-  <span>
-    <%= form_for @question, method: :delete do |f| %>
-      <%= f.submit "Delete" %>
-    <% end %>
-  </span>
-<% end %>
-
-<p>
-  <span>
-    <div class="votes">
-      <p>Votes: <%= @question.vote_count %></p>
+<<<<<<< HEAD
+<h1 class="questionTitle row"><%= @question.title %></h1>
+<div class="row">
+  <div class="col-sm-1 questionVoteControl">
+    <span class="glyphicon glyphicon-triangle-top" id="questionUpvoteButton" data-qid="<%=@question.id%>"></span>
+    <p id="questionVote"><%=@question.calculate_vote%></p>
+    <span class="glyphicon glyphicon-triangle-bottom" id="questionDownvoteButton" data-qid="<%=@question.id%>"></span>
+  </div>
+  <div class="col-sm-11">
+    <div class="row questionBody">
+      <p><%= @question.body %></p>
     </div>
-  </span>
-  <%= @question.body %>
-</p>
 
-<ul>
-  <li>
-    <% @question.tags.each do |tag| %>
-      <span class="tag"><%= link_to tag.name, tag_path(tag) %></span>
-    <% end %>
-  </li>
-</ul>
+    <div class="tags row questionTags">
+      <% @question.tags.each do |tag| %>
+        <span class="label label-info"><%= link_to tag.name, tag_path(tag)%></span>
+      <% end %>
+    </div>
+>>>>>>> added both upvote and downvote ajax functionality on both question and answer models
 
-<div class="question-info">
-        <p>asked: <%= @question.created_ago %> days ago by <%= link_to @question.user.username, user_path(@question.user) %></p>
+    <div class="row questionControlRow">
+      <div class="questionOwnerControl col-sm-8">
+        <% if @question.user_id == current_user.id %>
+          <div class="questionControlButtons row">
+            <%= link_to "Edit", edit_question_path(@question), class:"btn btn-sm btn-default col-sm-1" %>
+            <%= form_for @question, method: :delete do |f| %>
+              <%= f.submit "Delete", class:"btn btn-sm btn-default col-sm-1"%>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-sm-4">
+          <p class="questionOwner">asked: <%= @question.created_ago %> days ago by <%= link_to @question.user.username, user_path(@question.user) %></p>
+      </div>
+    </div>
+  </div>
+</div>
+<%=render partial:"comment_display",locals:{source:@question}%>
+
+<div class="row addCommentButton">
+  <%= link_to "add a comment", new_question_comment_path(@question) %>
 </div>
 
-<% if @question.comments.length > 0 %>
-  <ul>
-    <% @question.comments.each do |comment| %>
-      <li>
-        <%= comment.body %><span> -<%= link_to comment.user.username, user_path(comment.user) %></span>
-      </li>
-      <% if current_user && comment.user_id == current_user.id %>
-        <li>
-          <span><%= link_to "Edit", edit_question_comment_path(@question, comment) %></span>
-          <span>
-            <%= form_for [@question, comment], method: :delete do |f| %>
-              <%= f.submit "Delete" %>
-            <% end %>
-          </span>
-        </li>
-      <% end %>
-    <% end %>
-  </ul>
-<% end %>
-
-<% if current_user %>
-  <%= link_to "add a comment", new_question_comment_path(@question) %>
-<% end %>
-
-<% if @answers.length > 0 %>
-  <ul>
-    <% @answers.each do |answer| %>
-      <li>
-        <span>
-          <div class="votes">
-            <p>Votes: <%= answer.vote_count %></p>
-          </div>
-        </span>
-        <%= answer.body %>
-      </li>
-      <li>
-        <div class="answer-info">
-          <p>answered: <%= answer.created_ago %> days ago by <%= link_to answer.user.username, user_path(answer.user) %></p>
-        </div>
-      </li>
-      <li>
-        <% if current_user && answer.user_id == current_user.id %>
-          <span><%= link_to "Edit", edit_question_answer_path(@question, answer) %></span>
-          <span>
-            <%= form_for [@question, answer], method: :delete do |f| %>
-              <%= f.submit "Delete" %>
-            <% end %>
-          </span>
-        <% end %>
-      </li>
-      <% if answer.comments.length > 0 %>
-        <li>
-          <% answer.comments.each do |comment| %>
-            <ul>
-              <li><%= comment.body %><span> -<%= link_to comment.user.username, user_path(comment.user) %></span></li>
-              <% if current_user && comment.user_id == current_user.id %>
-                <li>
-                  <span><%= link_to "Edit", edit_answer_comment_path(answer, comment) %></span>
-                  <span>
-                    <%= form_for [answer, comment], method: :delete do |f| %>
-                      <%= f.submit "Delete" %>
-                    <% end %>
-                  </span>
-                </li>
-              <% end %>
-            </ul>
-          <% end %>
-        </li>
-      <% end %>
-      <% if current_user %>
-        <li>
-          <%= link_to "add a comment", new_answer_comment_path(answer) %>
-        </li>
-      <% end %>
-    <% end %>
-  </ul>
+<<<<<<< HEAD
+<% if @question.answers.length == 0 %>
+  <div class="row">
+    <h2>There are no answers for this question yet</h2>
+  </div>
 <% else %>
-  <p>There are no answers for this question yet</p>
+  <div class="row">
+    <h2><%=@question.answers.length%> Answers</h2>
+  </div>
 <% end %>
 
-<% if current_user %>
-  <%= link_to "Add an answer", new_question_answer_path(@question) %>
+<div id="answerRow">
+<% @question.answers.each do |answer| %>
+<div class="row">
+  <div class="col-sm-1 answerVoteControl">
+    <span class="glyphicon glyphicon-triangle-top" data-aid="<%=answer.id%>"></span>
+    <p id="answerCount<%=answer.id%>"><%=answer.calculate_vote%></p>
+    <span class="glyphicon glyphicon-triangle-bottom" data-aid="<%=answer.id%>"></span>
+  </div>
+  <div class="col-sm-11">
+    <div class="row">
+      <%= answer.body %> <% if answer.user_id == current_user.id %><%= link_to "Edit", edit_question_path(@question, answer) %> | <%= form_for [@question, answer], method: :delete, :html=>{:class=>'commentControl'} do |f| %><%= f.submit "Delete", class:"btn btn-link commentControl" %><% end %><% end %>
+    </div>
+    <div class="answerSecondRow row">
+      <div class="questionOwnerControl col-sm-8">
+          <%= render partial:"comment_display", locals:{source:answer}%>
+        <div class="row">
+          <%= link_to "add a comment", new_answer_comment_path(answer) %>
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+        <p>answered: <%= answer.created_ago %> days ago</p>
+        <%= link_to answer.user.username, user_path(answer.user) %>
+      </div>
+    </div>
+  </div>
+</div>
+>>>>>>> added both upvote and downvote ajax functionality on both question and answer models
 <% end %>
+</div>
+
+<<<<<<< HEAD
+<div class="row">
+  <h2>Your Answer</h2>
+  <%= render partial:"answer_form",locals:{question: @question,answer: Answer.new}%>
+</div>
+>>>>>>> added both upvote and downvote ajax functionality on both question and answer models

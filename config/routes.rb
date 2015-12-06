@@ -21,7 +21,12 @@ Rails.application.routes.draw do
   end
 
   resources :tags, only: [:show, :index]
-
+  resources :questions, only:[] do
+    resources :votes, only:[:create]
+  end
+  resources :answers, only:[] do
+    resources :votes, only:[:create]
+  end
   post '/tags/search' => 'tags#search'
   get '/login' => 'sessions#new'
   get '/logout' => 'sessions#destroy'
