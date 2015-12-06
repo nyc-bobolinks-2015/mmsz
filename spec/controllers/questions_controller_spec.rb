@@ -10,7 +10,7 @@ RSpec.describe QuestionsController, type: :controller do
 
   it "#index" do
     get :index
-    expect(assigns(:questions)).to eq Question.all
+    expect(assigns(:questions)).to eq Question.latest || Question.greatest 
   end
 
   it "#new" do
