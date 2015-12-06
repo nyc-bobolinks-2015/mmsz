@@ -43,6 +43,8 @@ class QuestionsController < ApplicationController
 
   def show
     @question = Question.find_by(id: params[:id])
+    @answers = Answer.where(question_id: @question.id)
+    @answers = @answers.sort_by{|answer| -answer.vote_count}
   end
 
   def destroy
