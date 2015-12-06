@@ -2,7 +2,9 @@ class QuestionsController < ApplicationController
   include QuestionsHelper
 
   def index
-    @questions = Question.all
+    mode = params[:query] || "latest"
+    mode == "latest" ? @questions = Question.latest : @questions = Question.greatest
+    # @questions = Question.all
   end
 
   def new

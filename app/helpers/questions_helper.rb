@@ -12,7 +12,6 @@ module QuestionsHelper
       unless question.tags.include?(tag)
         question.tags << tag
       end
-      # question.tags.find_or_create_by(name: tag_name)
     end
   end
 
