@@ -9,7 +9,7 @@ class TagsController < ApplicationController
   end
 
   def search
-    @tag = Tag.find_by(name: params[:search_name])
+    @tag = Tag.find_by(name: params[:search_name].downcase)
     if @tag
       render "tags/show"
     else

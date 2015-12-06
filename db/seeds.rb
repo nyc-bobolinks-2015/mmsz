@@ -24,7 +24,7 @@ answers.each do |answer|
   5.times {answer.comments.create!(body: Faker::Lorem.sentence, user_id: users.sample.id)}
 end
 
-30.times {Tag.create!(name: Faker::Name.first_name)}
+30.times {Tag.create!(name: Faker::Name.first_name.downcase)}
 
 tags = Tag.all
 

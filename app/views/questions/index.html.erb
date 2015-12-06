@@ -1,3 +1,7 @@
+<div id="latest_and_greatest">
+	<%= link_to "Latest", question: :index, :query => "latest" %> <%= link_to "Greatest", question: :index, :query => "greatest" %>
+</div>
+
 <% @questions.each do |question| %>
 <div class="questionRow row">
 	<div class="vote col-sm-2">
@@ -15,7 +19,7 @@
 		<div class="tags row">
 			<% question.tags.each do |tag| %>
 				<span class="label label-info"><%= link_to tag.name, tag_path(tag) %></span>
-			<% end %> 	
+			<% end %>
         	<p class="questionCreatedTime">asked: <%= question.created_ago %> days ago <%= link_to question.user.username, user_path(question.user) %></p>
 		</div>
 	</div>
