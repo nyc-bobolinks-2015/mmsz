@@ -29,7 +29,9 @@ div #latest_and_greatest {
 }
 
 #latest_and_greatest a:hover {
-  color: black;
+  color: #62A4E8;
+  background-color: white;
+  border: solid 1px white;
 }
 
 .list_of_tags a {
@@ -54,4 +56,10 @@ div #latest_and_greatest {
 
 .tagname a:hover{
   color: #E87730;
+  background-color: white;
+  border: solid 1px white;
+}
+
+.bolder {
+  font-weight: bolder;
 }

@@ -1,5 +1,5 @@
 <%= link_to "back to all tags", tags_path %>
-<h2><%= @tag.name.upcase %></h2>  
+<h2 class="bolder"><%= @tag.name %></h2>  
 <div>
   <ul>
     <% @tag.questions.each do |question|%>
