@@ -23,7 +23,7 @@ feature 'Tags index page' do
   scenario 'search by name form takes you to search route' do
     visit tags_path
     fill_in 'search_name', with: Tag.last.name
-    click_button("Search By Tag")
+    click_button("search by tag")
     expect(current_path).to eq "/tags/search"
   end
 

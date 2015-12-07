@@ -7,10 +7,8 @@
         <p> <%= question.vote_count %> votes, <%= question.answers.count %> answers </p>
         <p><%= link_to question.title, question_path(question) %></p>
         <p><%= truncate(question.body, limit: 80) %></p>
-        <p><% question.tags.each do |tag| %>
-          <p class="little_box">
+        <p class="list_of_tags"><% question.tags.each do |tag| %>
             <%= link_to tag.name, tag_path(tag) %>
-          </p>
            <% end %>
         </p>
       </li>
