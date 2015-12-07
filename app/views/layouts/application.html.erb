@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Mmsz</title>
+  <title>STACKUNDERFLOW</title>
   <%= stylesheet_link_tag 'application', media: 'all' %>
     <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -15,15 +15,15 @@
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <ul class="nav navbar-nav">
-        <li><%= link_to 'StackUnderFlow', root_path %></li>
+        <li class="header_text"><%= link_to 'STACKUNDERFLOW', root_path %></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if current_user %>
           <li><%= link_to current_user.username, user_path(current_user) %></li>
-          <li><%= link_to 'Logout', logout_path %></li>
+          <li><%= link_to 'logout', logout_path %></li>
         <% else %>
-          <li><%= link_to 'Login', login_path %></li>
-          <li><%= link_to 'Register', register_path %></li>
+          <li><%= link_to 'login', login_path %></li>
+          <li><%= link_to 'register', register_path %></li>
         <% end %>
       </ul>
     </div>
