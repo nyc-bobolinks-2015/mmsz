@@ -31,6 +31,12 @@
           <p class="questionOwner">asked: <%= @question.created_ago %> days ago by <%= link_to @question.user.username, user_path(@question.user) %></p>
       </div>
     </div>
+    <div id="questionComments">
+      <%=render partial:"comment_display",locals:{source:@question}%>
+    </div>
+    <div class="row addCommentButton" id="questionAddComment">
+      <%= link_to "add a comment", new_question_comment_path(@question) %>
+    </div>
   </div>
 </div>
 
@@ -63,17 +69,20 @@
     <span class="glyphicon glyphicon-triangle-bottom" data-aid="<%=answer.id%>"></span>
   </div>
   <div class="col-sm-11">
-    <div class="row">
-      <%= answer.body %> <% if current_user && answer.user_id == current_user.id %><%= link_to "Edit", edit_question_path(@question, answer) %> | <%= form_for [@question, answer], method: :delete, :html=>{:class=>'commentControl'} do |f| %><%= f.submit "Delete", class:"btn btn-link commentControl" %><% end %><% end %>
+    <div class="row answerFirstRow">
+      <%= answer.body %> <%if current_user && (answer.user_id == current_user.id)%><%= link_to "Edit", edit_question_path(@question, answer) %> | <%= form_for [@question, answer], method: :delete, :html=>{:class=>'commentControl'} do |f| %><%= f.submit "Delete", class:"btn btn-link commentControl" %><% end %><% end %>
     </div>
     <div class="answerSecondRow row">
-      <div class="questionOwnerControl col-sm-8 answer-comment-display">
+      <p><strong>Comments:</strong></p>
+      <div class="questionOwnerControl col-sm-8">
+        <div class="eachAnswerComments">
           <%= render partial:"comment_display", locals:{source:answer}%>
+        </div>
         <% if logged_in? %>
-          <div class="row answer-comment">
+          <div class="row answerComments">
             <%= link_to "add a comment", new_answer_comment_path(answer) %>
           </div>
-        <% end %>
+        <%end%>
       </div>
 
       <div class="col-sm-4">

@@ -1,16 +1,8 @@
 class CommentsController < ApplicationController
   def new
-    if params[:question_id]
-      @commentable = Question.find_by(id: params[:question_id])
-    elsif params[:answer_id]
-      @commentable = Answer.find_by(id: params[:answer_id])
-    end
-
+    params[:question_id] ? @commentable = Question.find_by(id: params[:question_id]) : @commentable = Answer.find_by(id: params[:answer_id])
     @comment = Comment.new
-
-    if request.xhr?
-      render partial: 'form', layout: false
-    end
+    request.xhr? ? (render partial:"form",locals:{comment:@comment,commentable:@commentable}) : (render :"new")
   end
 
   def create
@@ -22,9 +14,13 @@ class CommentsController < ApplicationController
       @comment = @answer.comments.build(comment_params)
       @question = @answer.question
     end
-
+    source=@answer || @question
     if @comment.save
-      render partial: @comment
+      if request.xhr?
+        render partial:"new_comment",locals:{comment:@comment, source:source}
+      else
+        redirect_to question_path(@question)
+      end
     else
       @errors = @comment.errors.full_messages
       render :'comments/new'

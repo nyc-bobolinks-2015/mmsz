@@ -1,51 +1,51 @@
 <h2><%= @user.username %></h2>
 <p>Karma: <%= @user.karma %></p>
-<p>Top tags: <% @user.top_three_tags.each do |tag| %>
-	<span class="tag"><%= link_to tag, tag_path(tag) %></span>
-	<% end %>
+<p>Top tags: 
+	<span class="tags"><% @user.top_three_tags.each do |tag| %>
+	<span class="label label-info"><%= link_to tag, tag_path(tag) %></span>
+	<% end %></span>
 </p>
 <p>	Member for: <%= @user.created_ago %> days</p>
 
 <div id="user-question-container">
 	<h3>Recent Questions:</h3>
-	<ol id="user-recent-questions">
-		 <% @user.recent_three_questions.each do |question| %>
-		 	<li class="question-container">
-				<ul class="votes-and-answers">
-					<li>Votes: <%= question.vote_count %></li>
-					<li>Answers: <%= question.answers.count %></li>
-				</ul>
-				<ul class="question-main">
-					<li><%= link_to question.title, question_path(question) %></li>
-					<li><%= truncate(question.body, limit: 80) %></li>
-					<li><% question.tags.each do |tag| %>
-								<span class="tag"><%= link_to tag.name, tag_path(tag) %></span>
-							<% end %>
-					</li>
-				</ul>
-				<div class="question-info">
-					<p>asked: <%= question.created_ago %> days ago by <%= question.user.username %></p>
+	<% @user.recent_three_questions.each do |question| %>
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+		 		<h3 class="panel-title"><%= link_to question.title, question_path(question) %></h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-sm-6">
+		 			<p><%= truncate(question.body, limit: 80) %></p>
+		 			<p>asked: <%= question.created_ago %> days ago by <%= question.user.username %></p>
+		 		</div>
+		 		<div class="col-sm-6">
+					<p>Votes: <%= question.vote_count %></p>
+					<p>Answers: <%= question.answers.count %></p>
+					<div class="tags row">
+						<% question.tags.each do |tag| %>
+							<span class="label label-info"><%= link_to tag.name, tag_path(tag) %></span>
+						<% end %>
+					</div>
 				</div>
-			</li>
-		 <% end %>
-	</ol>
+			</div>
+		</div>
+	</div>
+	<% end %>
 </div>
-<div id="user-answer-container">
-	<h3>Recent Answers:</h3>
-	<ol id="user-recent-answers">
-		<% @user.recent_three_answers.each do |answer| %>
-			<li class="answer-container">
-				<div class="votes">
-					<p>Votes: <%= answer.vote_count %></p>
-				</div>
-				<ul class="answer-main">
-					<li><%= truncate(answer.body, limit: 80) %></li>
-					<li><%= link_to answer.question.title, question_answer_path(answer.question, answer)  %></li>
-				</ul>
-				<div class="answer-info">
-					<p>Answered: <%= answer.created_ago %> days ago by <%= answer.user.username %></p>
-				</div>
-			</li>
-		<% end %>
-	</ol>
-</div>
+
+<h3>Recent Answers:</h3>
+<% @user.recent_three_answers.each do |answer| %>
+	<div class="panel panel-success">
+		<div class="panel-heading">
+			<h3 class="panel-title"><%= link_to answer.question.title, question_answer_path(answer.question, answer)%></h3>
+		</div>
+		<div class="panel-body">
+			<p><%= truncate(answer.body, limit: 80) %></p>
+			<p>Votes: <%= answer.vote_count %></p>
+			<p>Time: <%= answer.created_ago %> days ago</p>
+		</div>
+	</div>
+<% end %>
+

@@ -1,11 +1,11 @@
-  <%= form_for [@commentable, @comment], id:"comment-form" do |f| %>
-  <fieldset>
-    <div>
-      <%= f.label :body %>
-      <%= f.text_area :body %>
+<div class="commentForm">
+<%= form_for [commentable, comment] do |f| %>
+    <div class="form-group">
+      <%= f.label :"New Comment" %>
+      <%= f.text_area :body,class:"form-control" %>
     </div>
-    <div>
-      <%= f.submit %>
+    <div class="form-group">
+      <%= f.submit class:"btn btn-primary btn-md" %>
     </div>
-  </fieldset>
 <% end %>
+</div>

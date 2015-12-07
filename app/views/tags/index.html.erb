@@ -6,16 +6,10 @@
     <%= submit_tag "search by tag"%>
   <% end %>
 </div>
-
+<h2>Tags</h2>
 <div id="latest_and_greatest">
   <%= link_to "latest", tags: :index, :query => "latest" %> <%= link_to "greatest", tags: :index, :query => "greatest" %>
 </div>
-
-<div class="list_of_tags">
-  <ul>
-  <% @tags.each do |tag|%>
-    <li><%= link_to tag.name, tag_path(tag) %> <%= tag.questions.count %></li>
-    <li><%= tag.questions.added_today.length %> added today / <%= tag.questions.added_this_week.length %> added this week</li>
-  <% end %>
-  </ul>
-</div>
+<% @tags.each do |tag|%>
+<%= link_to(raw("<h4 class='list-group-item-heading'><span class='tagName'>#{tag.name}</span><span class='badge' style='float:right;'>#{tag.questions.count}</span></h4><p class='list-group-item-text'>#{tag.questions.added_today.length} added today</p><p class='list-group-item-text'>#{tag.questions.added_this_week.length} added this week</p>"), tag_path(tag),{:class=>'list-group-item'})%>
+<% end %>
