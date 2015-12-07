@@ -17,6 +17,7 @@ class UsersController < ApplicationController
   end
 
   def index
+    @counter=0;
     @users = User.all
   end
 

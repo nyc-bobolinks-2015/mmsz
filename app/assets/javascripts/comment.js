@@ -1,0 +1,57 @@
+$(document).ready(function(){
+	$(".addCommentButton").on("click","a",function(event){
+		event.preventDefault();
+		$.ajax({
+			method:"get",
+			url:$(event.target).attr("href")
+		}).done(function(result){
+			$(event.target).hide();
+			$(event.target).parent().append(result);
+		}).fail(function(error){
+			console.log(error);
+		});
+	});
+
+	$("#questionAddComment").on("submit",function(event){
+		event.preventDefault();
+		$.ajax({
+			method:"post",
+			url:$(event.target).attr("action"),
+			data:$(event.target).serialize()
+		}).done(function(result){
+			$(event.target).remove();
+			$("#questionComments").append(result);
+			$("#questionAddComment").children().show();
+		}).fail(function(error){
+			console.log(error);
+		});
+	});
+
+	$(".answerComments").on("click","a",function(event){
+		event.preventDefault();
+		$.ajax({
+			method:"get",
+			url:$(event.target).attr("href")
+		}).done(function(result){
+			$(event.target).parent().append(result);
+			$(event.target).hide();
+		}).fail(function(error){
+			console.log(error);
+		});
+	});
+
+	$(".questionOwnerControl").on("submit",".commentForm",function(event){
+		event.preventDefault();
+		$.ajax({
+			method:"post",
+			url:$(event.target).attr("action"),
+			data:$(event.target).serialize()
+		}).done(function(result){
+			$(event.target).parent().parent().prev().append(result);
+			$(event.target).parent().prev().show();
+			$(event.target).remove();
+		}).fail(function(error){
+			console.log(error);
+		});
+	});
+});

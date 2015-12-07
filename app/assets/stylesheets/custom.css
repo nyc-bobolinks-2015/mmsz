@@ -44,6 +44,7 @@ a:hover{
 	font-weight: 100;
 	font-size:1em;
 	padding-top:2px;
+	line-height: 1.8em;
 	border-radius: 0px;
 }
 .tags .label-info{
@@ -125,3 +126,12 @@ a:hover{
 	padding-top:0.2em;
 	color:#818185;
 }
+.answerFirstRow{
+	margin-bottom: 1em;
+}
+/*Tag Index Page*/
+.tagName{
+    background-color: #E4EDF4;
+    padding: 5px;
+    color: #23527c;
+}	
