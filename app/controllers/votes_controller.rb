@@ -1,4 +1,5 @@
 class VotesController < ApplicationController
+	#Refactor this - the if / else are almost identical
 	def create
 		if (params[:question_id])
 			question = Question.find(params[:question_id])

@@ -15,6 +15,7 @@ class AnswersController < ApplicationController
         redirect_to question_path(@question)
       end
     else
+      # What if this was xhr?
       @errors = @answer.errors.full_messages
       render :'answers/new'
     end

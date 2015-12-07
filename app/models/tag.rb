@@ -8,6 +8,7 @@ class Tag < ActiveRecord::Base
     Tag.all.order(updated_at: :desc)
   end
 
+  #Do this in a query
   def self.greatest
     tags = Tag.all
     tags = tags.sort_by{|tag| -tag.questions.count}

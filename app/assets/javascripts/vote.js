@@ -1,4 +1,6 @@
 $(document).ready(function(){
+	/* These two handlers are very similar. Consider extracting a 
+	parameterized fn for the common parts */
 	$('#questionUpvoteButton').on("click",function(event){
 		var qid = $(event.target).data("qid");
 		$.ajax({

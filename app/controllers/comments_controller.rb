@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+
+  #Prefer having the form present in DOM but hidden
   def new
     params[:question_id] ? @commentable = Question.find_by(id: params[:question_id]) : @commentable = Answer.find_by(id: params[:answer_id])
     @comment = Comment.new

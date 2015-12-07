@@ -4,6 +4,7 @@ module QuestionsHelper
     tag_names.split(", ")
   end
 
+  #This looks like model logic for tag
   def create_new_tags(tag_names, question)
     separate_tags(tag_names).map do |tag_name|
       tag_name = tag_name.downcase
