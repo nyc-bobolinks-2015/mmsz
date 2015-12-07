@@ -1,0 +1,8 @@
+<div class="row commentRow"><%= comment.body %> - <%= link_to comment.user.username, user_path(comment.user), class:"commentUser"%> <%=comment.created_at%> 
+	<% if comment.user_id == current_user.id %>
+    <%= link_to "Edit", edit_question_comment_path(source, comment) %> | 
+    <%= form_for [source, comment], method: :delete, :html=>{:class=>'commentControl'} do |f| %>
+    <%= f.submit "Delete", class:"btn btn-link commentControl" %>
+    <% end %>
+  <% end %>
+</div>
