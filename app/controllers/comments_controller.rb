@@ -23,12 +23,8 @@ class CommentsController < ApplicationController
       @question = @answer.question
     end
 
-    if request.xhr?
-      render partial :'comment', locals:{comment: @comment}, layout: false
-    end
-
     if @comment.save
-      redirect_to question_path(@question)
+      render partial: @comment
     else
       @errors = @comment.errors.full_messages
       render :'comments/new'

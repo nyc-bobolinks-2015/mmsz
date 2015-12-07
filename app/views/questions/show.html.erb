@@ -33,7 +33,10 @@
     </div>
   </div>
 </div>
-<%=render partial:"comment_display",locals:{source:@question}%>
+
+<div id="question-comments-display">
+  <%=render partial:"comment_display",locals:{source:@question}%>
+</div>
 
 <% if logged_in? %>
   <div class="row addCommentButton">
