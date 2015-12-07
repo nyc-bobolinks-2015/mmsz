@@ -1,0 +1,44 @@
+.list_of_tags ul li {
+  list-style-type: none;
+  text-decoration: none;
+  color: #62A4E8;
+}
+
+.list_of_tags ul li a {
+  padding: 2px;
+  list-style-type: none;
+  text-decoration: none;
+  font-weight: bold;
+  color: white;
+  background-color: #62A4E8;
+  border: solid 1px #62A4E8;
+}
+
+div #latest_and_greatest {
+  text-align: center;
+}
+
+#latest_and_greatest a {
+  padding: 2px 10px 2px 10px; 
+  padding-right: 10px;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  background-color: #BC83FF;
+  border: solid 1px #BC83FF;
+}
+
+.list_of_tags a {
+  padding: 2px;
+  list-style-type: none;
+  text-decoration: none;
+  font-weight: bold;
+  color: white;
+  background-color: #62A4E8;
+  border: solid 1px #62A4E8;
+}
+
+.list_of_tags a:hover {
+  list-style-type: none;
+  text-decoration: none;
+}

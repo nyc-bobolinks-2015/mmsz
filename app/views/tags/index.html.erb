@@ -1,16 +1,17 @@
 <!-- TODO: Make this route work -->
+<h2> #tags </h2>
 <div id="search_by_tag">
   <%= form_tag tags_search_path do %>
     <%= text_field_tag :search_name %>
-    <%= submit_tag "Search By Tag"%>
+    <%= submit_tag "search by tag"%>
   <% end %>
 </div>
 
 <div id="latest_and_greatest">
-  <%= link_to "Latest", tags: :index, :query => "latest" %> <%= link_to "Greatest", tags: :index, :query => "greatest" %>
+  <%= link_to "latest", tags: :index, :query => "latest" %> <%= link_to "greatest", tags: :index, :query => "greatest" %>
 </div>
 
-<div>
+<div class="list_of_tags">
   <ul>
   <% @tags.each do |tag|%>
     <li><%= link_to tag.name, tag_path(tag) %> <%= tag.questions.count %></li>
