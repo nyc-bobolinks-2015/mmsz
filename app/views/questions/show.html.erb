@@ -34,14 +34,12 @@
     <div id="questionComments">
       <%=render partial:"comment_display",locals:{source:@question}%>
     </div>
-    <div class="row addCommentButton" id="questionAddComment">
-      <%= link_to "add a comment", new_question_comment_path(@question) %>
-    </div>
+    <%if current_user%>
+      <div class="row addCommentButton" id="questionAddComment">
+        <%= link_to "add a comment", new_question_comment_path(@question) %>
+      </div>
+    <%end%>
   </div>
-</div>
-
-<div id="question-comments-display">
-  <%=render partial:"comment_display",locals:{source:@question}%>
 </div>
 
 <% if logged_in? %>
