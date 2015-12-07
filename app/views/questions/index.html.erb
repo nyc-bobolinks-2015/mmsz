@@ -1,5 +1,6 @@
-<div id="latest_and_greatest">
-	<%= link_to "Latest", question: :index, :query => "latest" %> <%= link_to "Greatest", question: :index, :query => "greatest" %>
+<div class="tags">
+	<span class="label label-info"><%= link_to "Latest", question: :index,:query => "latest"%></span>
+	<span class="label label-info"><%= link_to "Greatest", question: :index, :query => "greatest" %></span>
 </div>
 
 <% @questions.each do |question| %>
