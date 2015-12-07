@@ -64,4 +64,58 @@ $(document).ready(function(){
 		});
 	});
 
+	$('.addCommentButton').on("click", "a", function(event){
+		event.preventDefault();
+
+		$.ajax({
+			method: "get",
+			url: $(event.target).attr("href")
+		}).done(function(result){
+			$("#question-comments-display").append(result);
+		}).fail(function(error){
+			console.log(error);
+		})
+	});
+
+	$("#question-comments-display").on("submit", "form", function(event){
+		event.preventDefault();
+		$.ajax({
+			method: "post",
+			url: $(event.target).attr("action"),
+			data: $(event.target).serialize()
+		}).done(function(result){
+			$(event.target).remove();
+			$("#question-comments-display").append(result);
+		}).fail(function(error){
+			console.log(error);
+		})
+	});
+
+	$('.answer-comment').on("click", "a", function(event){
+		event.preventDefault();
+
+		$.ajax({
+			method: "get",
+			url: $(event.target).attr("href")
+		}).done(function(result){
+			$(event.target).parent().prepend(result);
+		}).fail(function(error){
+			console.log(error);
+		})
+	});
+
+	$(".answer-comment-display").on("submit", "form", function(event){
+		event.preventDefault();
+		$.ajax({
+			method: "post",
+			url: $(event.target).attr("action"),
+			data: $(event.target).serialize()
+		}).done(function(result){
+			$(event.target).remove();
+			$(".answer-comment-display").prepend(result);
+		}).fail(function(error){
+			console.log(error);
+		})
+	});
+
 });

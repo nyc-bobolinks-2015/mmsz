@@ -7,6 +7,10 @@ class CommentsController < ApplicationController
     end
 
     @comment = Comment.new
+
+    if request.xhr?
+      render partial: 'form', layout: false
+    end
   end
 
   def create
@@ -20,7 +24,7 @@ class CommentsController < ApplicationController
     end
 
     if @comment.save
-      redirect_to question_path(@question)
+      render partial: @comment
     else
       @errors = @comment.errors.full_messages
       render :'comments/new'

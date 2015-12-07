@@ -33,7 +33,10 @@
     </div>
   </div>
 </div>
-<%=render partial:"comment_display",locals:{source:@question}%>
+
+<div id="question-comments-display">
+  <%=render partial:"comment_display",locals:{source:@question}%>
+</div>
 
 <% if logged_in? %>
   <div class="row addCommentButton">
@@ -64,10 +67,10 @@
       <%= answer.body %> <% if current_user && answer.user_id == current_user.id %><%= link_to "Edit", edit_question_path(@question, answer) %> | <%= form_for [@question, answer], method: :delete, :html=>{:class=>'commentControl'} do |f| %><%= f.submit "Delete", class:"btn btn-link commentControl" %><% end %><% end %>
     </div>
     <div class="answerSecondRow row">
-      <div class="questionOwnerControl col-sm-8">
+      <div class="questionOwnerControl col-sm-8 answer-comment-display">
           <%= render partial:"comment_display", locals:{source:answer}%>
         <% if logged_in? %>
-          <div class="row">
+          <div class="row answer-comment">
             <%= link_to "add a comment", new_answer_comment_path(answer) %>
           </div>
         <% end %>
