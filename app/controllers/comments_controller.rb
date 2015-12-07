@@ -7,6 +7,10 @@ class CommentsController < ApplicationController
     end
 
     @comment = Comment.new
+
+    if request.xhr?
+      render partial: 'form', layout: false
+    end
   end
 
   def create
@@ -17,6 +21,10 @@ class CommentsController < ApplicationController
       @answer = Answer.find_by(id: params[:answer_id])
       @comment = @answer.comments.build(comment_params)
       @question = @answer.question
+    end
+
+    if request.xhr?
+      render partial :'comment', locals:{comment: @comment}, layout: false
     end
 
     if @comment.save
