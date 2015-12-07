@@ -9,7 +9,11 @@ class AnswersController < ApplicationController
     @answer = @question.answers.build(answer_params)
 
     if @answer.save
-      redirect_to question_path(@question)
+      if request.xhr?
+        render partial: "questions/answer_body", locals: {answer: @answer, question: @question}
+      else
+        redirect_to question_path(@question)
+      end
     else
       @errors = @answer.errors.full_messages
       render :'answers/new'

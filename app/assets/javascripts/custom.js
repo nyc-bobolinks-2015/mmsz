@@ -51,4 +51,17 @@ $(document).ready(function(){
 		});
 	});
 
+	$('#new_answer').on("submit", function(event){
+		event.preventDefault();
+		$.ajax({
+			method:"post",
+			url: $(event.target).attr('action'),
+			data: $(event.target).serialize()
+		}).done(function(result){
+			$("#answerRow").append(result);
+		}).fail(function(error){
+			console.log(error);
+		});
+	});
+
 });
