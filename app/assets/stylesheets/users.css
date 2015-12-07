@@ -1,0 +1,6 @@
+#user-list li {
+  list-style-type: none;
+  text-decoration: none;
+  color: #62A4E8;
+  margin-top: 5px 5px 5px 0px;
+}

@@ -1,9 +1,9 @@
-<ol id="user-list">
+<div id="user-list">
 	<% @users.each do |user| %>
 		<li class="user">
-			<ul>
+			<ul class="space">
 				<li class="username"><%= link_to user.username, user_path(user) %></li>
-				<li class="karma"><%= user.karma %></li>
+				<li class="karma">karma points: <%= user.karma %></li>
 				<li class="top-tags">
 					<% user.top_three_tags.each do |tag| %>
 						<%= link_to tag, tag_path(tag) %>
@@ -12,4 +12,4 @@
 			</ul>
 		</li>
 	<% end %>
-</ol>
+</div>
