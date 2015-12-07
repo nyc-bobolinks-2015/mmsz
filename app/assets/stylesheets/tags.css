@@ -24,8 +24,12 @@ div #latest_and_greatest {
   font-weight: bold;
   color: white;
   text-decoration: none;
-  background-color: #BC83FF;
-  border: solid 1px #BC83FF;
+  background-color: #E87730;
+  border: solid 1px #E87730;
+}
+
+#latest_and_greatest a:hover {
+  color: black;
 }
 
 .list_of_tags a {
@@ -41,4 +45,13 @@ div #latest_and_greatest {
 .list_of_tags a:hover {
   list-style-type: none;
   text-decoration: none;
+}
+
+.tagname {
+  font-weight: bolder;
+  font-size: 2em;
+}
+
+.tagname a:hover{
+  color: #E87730;
 }
