@@ -1,0 +1,28 @@
+<div class="tags">
+	<span class="label label-info"><%= link_to "Latest", question: :index,:query => "latest"%></span>
+	<span class="label label-info"><%= link_to "Greatest", question: :index, :query => "greatest" %></span>
+</div>
+
+<% @questions.each do |question| %>
+<div class="questionRow row">
+	<div class="vote col-sm-2">
+		<p><%= question.vote_count %></p>
+		<p>votes</p>
+	</div>
+	<div class="answer col-sm-2">
+		<p><%= question.answers.length%></p>
+		<p>answers</p>
+	</div>
+	<div class="rowQuestionTag col-sm-8">
+		<div class="question row">
+			<%= link_to question.title, question_path(question) %>
+		</div>
+		<div class="tags row">
+			<% question.tags.each do |tag| %>
+				<span class="label label-info"><%= link_to tag.name, tag_path(tag) %></span>
+			<% end %>
+        	<p class="questionCreatedTime">asked: <%= question.created_ago %> days ago <%= link_to question.user.username, user_path(question.user) %></p>
+		</div>
+	</div>
+</div>
+<% end %>

@@ -1,0 +1,51 @@
+<h2><%= @user.username %></h2>
+<p>Karma: <%= @user.karma %></p>
+<p>Top tags: 
+	<span class="tags"><% @user.top_three_tags.each do |tag| %>
+	<span class="label label-info"><%= link_to tag, tag_path(tag) %></span>
+	<% end %></span>
+</p>
+<p>	Member for: <%= @user.created_ago %> days</p>
+
+<div id="user-question-container">
+	<h3>Recent Questions:</h3>
+	<% @user.recent_three_questions.each do |question| %>
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+		 		<h3 class="panel-title"><%= link_to question.title, question_path(question) %></h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-sm-6">
+		 			<p><%= truncate(question.body, limit: 80) %></p>
+		 			<p>asked: <%= question.created_ago %> days ago by <%= question.user.username %></p>
+		 		</div>
+		 		<div class="col-sm-6">
+					<p>Votes: <%= question.vote_count %></p>
+					<p>Answers: <%= question.answers.count %></p>
+					<div class="tags row">
+						<% question.tags.each do |tag| %>
+							<span class="label label-info"><%= link_to tag.name, tag_path(tag) %></span>
+						<% end %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<% end %>
+</div>
+
+<h3>Recent Answers:</h3>
+<% @user.recent_three_answers.each do |answer| %>
+	<div class="panel panel-success">
+		<div class="panel-heading">
+			<h3 class="panel-title"><%= link_to answer.question.title, question_answer_path(answer.question, answer)%></h3>
+		</div>
+		<div class="panel-body">
+			<p><%= truncate(answer.body, limit: 80) %></p>
+			<p>Votes: <%= answer.vote_count %></p>
+			<p>Time: <%= answer.created_ago %> days ago</p>
+		</div>
+	</div>
+<% end %>
+

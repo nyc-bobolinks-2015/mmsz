@@ -36,6 +36,12 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'faker'
   gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'launchy'
+  gem 'selenium-webdriver'
+  gem 'database_cleaner'
+  gem 'shoulda-matchers'
+  gem 'pry'
 end
 
 group :development do
@@ -47,3 +53,4 @@ group :development do
   gem 'spring'
 end
 
+gem 'simplecov', :require => false, :group => :test

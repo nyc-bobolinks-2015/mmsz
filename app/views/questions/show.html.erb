@@ -1,0 +1,102 @@
+<h1 class="questionTitle row"><%= @question.title %></h1>
+<div class="row">
+  <div class="col-sm-1 questionVoteControl">
+    <span class="glyphicon glyphicon-triangle-top" id="questionUpvoteButton" data-qid="<%=@question.id%>"></span>
+    <p id="questionVote"><%=@question.calculate_vote%></p>
+    <span class="glyphicon glyphicon-triangle-bottom" id="questionDownvoteButton" data-qid="<%=@question.id%>"></span>
+  </div>
+  <div class="col-sm-11">
+    <div class="row questionBody">
+      <p><%= @question.body %></p>
+    </div>
+
+    <div class="tags row questionTags">
+      <% @question.tags.each do |tag| %>
+        <span class="label label-info"><%= link_to tag.name, tag_path(tag)%></span>
+      <% end %>
+    </div>
+
+    <div class="row questionControlRow">
+      <div class="questionOwnerControl col-sm-8">
+        <% if current_user && @question.user_id == current_user.id %>
+          <div class="questionControlButtons row">
+            <%= link_to "Edit", edit_question_path(@question), class:"btn btn-sm btn-default col-sm-1" %>
+            <%= form_for @question, method: :delete do |f| %>
+              <%= f.submit "Delete", class:"btn btn-sm btn-default col-sm-1"%>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-sm-4">
+          <p class="questionOwner">asked: <%= @question.created_ago %> days ago by <%= link_to @question.user.username, user_path(@question.user) %></p>
+      </div>
+    </div>
+    <div id="questionComments">
+      <%=render partial:"comment_display",locals:{source:@question}%>
+    </div>
+    <%if current_user%>
+      <div class="row addCommentButton" id="questionAddComment">
+        <%= link_to "add a comment", new_question_comment_path(@question) %>
+      </div>
+    <%end%>
+  </div>
+</div>
+
+<% if logged_in? %>
+  <div class="row addCommentButton">
+    <%= link_to "add a comment", new_question_comment_path(@question) %>
+  </div>
+<% end %>
+
+<% if @question.answers.length == 0 %>
+  <div class="row">
+    <h2>There are no answers for this question yet</h2>
+  </div>
+<% else %>
+  <div class="row">
+    <h2><%=@question.answers.length%> Answers</h2>
+  </div>
+<% end %>
+
+<div id="answerRow">
+<% @answers.each do |answer| %>
+<div class="row">
+  <div class="col-sm-1 answerVoteControl">
+    <span class="glyphicon glyphicon-triangle-top" data-aid="<%=answer.id%>"></span>
+    <p id="answerCount<%=answer.id%>"><%=answer.calculate_vote%></p>
+    <span class="glyphicon glyphicon-triangle-bottom" data-aid="<%=answer.id%>"></span>
+  </div>
+  <div class="col-sm-11">
+    <div class="row answerFirstRow">
+      <%= answer.body %> <%if current_user && (answer.user_id == current_user.id)%><%= link_to "Edit", edit_question_path(@question, answer) %> | <%= form_for [@question, answer], method: :delete, :html=>{:class=>'commentControl'} do |f| %><%= f.submit "Delete", class:"btn btn-link commentControl" %><% end %><% end %>
+    </div>
+    <div class="answerSecondRow row">
+      <p><strong>Comments:</strong></p>
+      <div class="questionOwnerControl col-sm-8">
+        <div class="eachAnswerComments">
+          <%= render partial:"comment_display", locals:{source:answer}%>
+        </div>
+        <% if logged_in? %>
+          <div class="row answerComments">
+            <%= link_to "add a comment", new_answer_comment_path(answer) %>
+          </div>
+        <%end%>
+      </div>
+
+      <div class="col-sm-4">
+        <p>answered: <%= answer.created_ago %> days ago</p>
+        <%= link_to answer.user.username, user_path(answer.user) %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+</div>
+
+<% if logged_in? %>
+  <div class="row">
+    <h2>Your Answer</h2>
+    <%= render partial:"answer_form",locals:{question: @question,answer: Answer.new}%>
+  </div>
+<% end %>
+

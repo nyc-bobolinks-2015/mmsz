@@ -1,0 +1,21 @@
+<h2>Users</h2>
+<div class="row">
+<% @users.each do |user| %>
+		<div class="col-sm-4">
+			<div class="thumbnail">
+				<p><%= link_to user.username, user_path(user) %></p>
+				<p>Karma: <%= user.karma %></p>
+				<p>Hotest Tags:</p>
+				<div class="tags row" style="padding-left:15px; padding-right:15px;">
+					<% user.top_three_tags.each do |tag| %>
+						<span class="label label-info"><%= link_to tag, tag_path(tag) %></span>
+					<% end %>
+				</div>
+			</div>
+		</div>
+		<%@counter+=1%>
+		<%if @counter%3==0%>
+			</div>
+			<div class="row">
+		<%end%>
+<% end %>
