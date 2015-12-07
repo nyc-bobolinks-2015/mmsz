@@ -24,14 +24,19 @@ class Question < ActiveRecord::Base
   end
 
   def self.latest
-    Question.all.order(updated_at: :desc)
+    #You don't need the all here
+    Question.order(updated_at: :desc)
   end
 
+  #Maybe call this most_voted or highest_voted
   def self.greatest
+    # Question.joins(:votes).group('questions.id').order('sum(case when votes.up_vote then 1 else -1 end) desc').limit(10)
     questions = Question.all
     questions.sort_by{|question| -question.vote_count}
   end
 
+  # You can do this in one sql statement
+  # Vote.where(votable: self).sum('case when up_vote then 1 else -1 end')
   def calculate_vote
     upvote = self.votes.where(up_vote:true).count
     downvote= self.votes.count - upvote

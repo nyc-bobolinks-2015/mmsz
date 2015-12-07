@@ -1,4 +1,6 @@
 $(document).ready(function(){
+	/* Consider having the form hidden in the dom
+	 and just swapping it into place */
 	$(".addCommentButton").on("click","a",function(event){
 		event.preventDefault();
 		$.ajax({

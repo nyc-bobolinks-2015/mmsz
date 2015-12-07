@@ -4,9 +4,11 @@ class QuestionsController < ApplicationController
   def index
     mode = params[:query] || "latest"
     mode == "latest" ? @questions = Question.latest : @questions = Question.greatest
+    # don't leave comments in master
     # @questions = Question.all
   end
 
+  #Think about adding a before_action in the app controller to guard the mutating actions
   def new
     if logged_in?
       @question = Question.new
@@ -49,6 +51,7 @@ class QuestionsController < ApplicationController
 
   def show
     @question = Question.find_by(id: params[:id])
+    #this query is implicit in @question.answers
     @answers = Answer.where(question_id: @question.id)
     @answers = @answers.sort_by{|answer| -answer.vote_count}
   end

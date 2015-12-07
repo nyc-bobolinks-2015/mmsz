@@ -10,6 +10,7 @@ class Answer < ActiveRecord::Base
   validates :body, presence: true
   validates :body, length: {in: 1..3000}
 
+   #This along with the version in Question could be in your voting concern
    def calculate_vote
     upvote = self.votes.where(up_vote:true).count
     downvote= self.votes.count - upvote
